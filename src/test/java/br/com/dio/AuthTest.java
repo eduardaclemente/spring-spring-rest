@@ -33,4 +33,18 @@ public class AuthTest {
                         .is(200));
     }
 
+    @Test
+    public void deveRetornarErroComCredenciaisInvalidas() throws Exception {
+        URI uri = new URI("/auth/signin");
+
+        String content = "{ \"username\" : \"eclemente\" , \"senha\" : \"123456789\"}";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post(uri)
+                        .content(content) // conteúdo
+                        .contentType(MediaType.APPLICATION_JSON)) // posso construir cookies, tudo por aqui
+                .andExpect(MockMvcResultMatchers
+                        .status()
+                        .is(401));
+    }
 }
